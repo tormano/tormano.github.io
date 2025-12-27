@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Live TIME</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="clock.jpg" type="image/x-icon">
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: white;
+      font-family: monospace;
+      text-align: center;
+    }
+
+    #date {
+      font-size: 3vw;
+      color: #333;
+      margin-bottom: 5px; 
+    }
+
+    #time-container {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #clock {
+      font-size: 12vw; 
+      font-weight: bold;
+      color: black;
+    }
+
+    #milliseconds {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      font-size: 3vw;
+      color: #666;
+    }
+
+    @media (max-width: 768px) {
+      #date {
+        font-size: 4vw;
+        margin-bottom: 2px;
+      }
+      #clock {
+        font-size: 8vw;
+      }
+      #milliseconds {
+        font-size: 2.5vw;
+        bottom: -5px;
+        right: 5px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="date"></div>
+  <div id="time-container">
+    <div id="clock"></div>
+    <div id="milliseconds"></div>
+  </div>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const day = String(now.getDate()).padStart(2, '0');
+      document.getElementById('date').textContent = `${year}.${month}.${day}`;
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+      const milliseconds = String(now.getMilliseconds()).padStart(3, '0');
+      document.getElementById('milliseconds').textContent = milliseconds;
+    }
+
+    setInterval(updateClock, 10); 
+    updateClock(); 
+  </script>
+</body>
+
+</html>
